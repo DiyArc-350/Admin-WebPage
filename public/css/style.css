@@ -804,10 +804,6 @@ video {
   width: 100%;
 }
 
-.w-\[300px\] {
-  width: 300px;
-}
-
 .min-w-\[50px\] {
   min-width: 50px;
 }
@@ -856,10 +852,6 @@ video {
 
 .justify-center {
   justify-content: center;
-}
-
-.justify-evenly {
-  justify-content: space-evenly;
 }
 
 .gap-2 {
