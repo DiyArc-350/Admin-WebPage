@@ -1,3 +1,30 @@
+<?php
+session_start();
+
+// Koneksi ke functions.php
+require '../../../functions/auth.php';
+
+if(isset($_SESSION["login"])){
+    header("Location: ../dashboard.php");
+    exit;
+}
+
+// cek apakah tombol submit, sudah diklik apa belum
+if(isset($_POST["login"])){
+   if(loginLaboran($_POST) >0){
+    header("Location: ../dashboard.php");
+    exit;
+   }else{
+     echo "
+        <script>
+            alert('Gagal Login, silakan cek ulang');
+        </script>
+    ";
+   }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,20 +54,20 @@
                         <div class="border-2 border-graysimple rounded-full p-3 mx-1"></div>
                     </div>
                     <p class="text-graysimple my-3 text-sm">If you already a member, easily log in.</p>
-                    <form class="flex flex-col items-center">
+                    <form class="flex flex-col items-center" method="post">
                         <div class="bg-graywarrior border-graysimple w-64 p-2 rounded-xl border flex items-center mb-3">
-                            <input type="email" name="email" placeholder="Email" class="bg-graywarrior outline-none text-sm flex-1">
+                            <input type="username" name="username" placeholder="Username" class="bg-graywarrior outline-none text-sm flex-1">
                         </div>
                         <div class="bg-graywarrior border-graysimple w-64 p-2 rounded-xl border flex items-center mb-3 relative">
                              <input type="password" name="password" placeholder="Password" class="bg-graywarrior outline-none text-sm flex-1" id="password">
                              <img class="w-4 cursor-pointer top-1/2 absolute right-3 -translate-y-1/2 toggle-password" src="../../images/eye-close.png" data-close="../../images/eye-close.png" data-open="../../images/eye-open.png">
                         </div>
-                        <a 
-                            href="../dashboard.html"
+                        <button 
+                            type="submit" name="login"
                             class="mt-4 border-2 border-freshgreen rounded-full px-12 py-2 inline-block font-semibold hover:bg-freshgreen hover:text-white"
                         >
                             Log In
-                        </a>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -52,7 +79,7 @@
                 <div class="border-2 w-10 border-white inline-block mb-2"></div>
                 <p class="mb-7 mt-5">Register if you haven't already</p>
                 <a 
-                    href="./regist.html" 
+                    href="regist.php" 
                     class="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-freshgreen"
                 >
                     Sign Up
